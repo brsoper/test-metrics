@@ -3,7 +3,7 @@ name: Trigger Helm Chart Release
 on:
   push:
     branches:
-      - main
+      - "v*"
 
 jobs:
   trigger:
