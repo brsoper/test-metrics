@@ -73,7 +73,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git add charts/test-chart/Chart.yaml
           git commit -m "Update Helm chart version to ${{ env.VERSION }}"
-          git push origin main
+          git push https://x-access-token:${{ secrets.HELM_TRIGGER_TOKEN }}@github.com/brsoper/test-metrics.git main
 
 
   trigger:
