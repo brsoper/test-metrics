@@ -51,6 +51,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0  # Full history for Git operations
 
       # Extract version from Git tag
