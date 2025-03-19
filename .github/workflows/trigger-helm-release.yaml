@@ -65,7 +65,9 @@ jobs:
           sed -i "s/^version:.*/version: ${{ env.VERSION }}/" charts/test-chart/Chart.yaml
 
       # Push the Chart.yaml changes to the repo
-      - name: Update Helm Repo Index
+      - name: Update the chart version
+        env:
+          GITHUB_TOKEN: ${{ secrets.HELM_TRIGGER_TOKEN }}
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
