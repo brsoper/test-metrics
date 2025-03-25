@@ -12,8 +12,6 @@ jobs:
   build-image:
     name: Build Docker Image
     runs-on: ubuntu-latest
-    outputs:
-      chart-name: ${{ steps.extract.outputs.chart_name }}
     steps:
       # Checkout the repository
       - name: Checkout code
@@ -30,8 +28,8 @@ jobs:
       - name: Extract chart name from Chart.yaml
         id: extract
         run: |
-          chart_name=$(yq '.name' charts/test-chart/Chart.yaml)
-          echo "chart_name=$chart_name" >> $GITHUB_OUTPUT
+          CHART_NAME=$(yq '.name' charts/test-chart/Chart.yaml)
+          echo "CHART_NAME=$CHART_NAME" >> $GITHUB_ENV
 
       # Set up Docker Buildx
       - name: Set up Docker Buildx
@@ -51,7 +49,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.extract.outputs.chart_name }}:${{ env.VERSION }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/$CHART_NAME:${{ env.VERSION }}
 
 
   update-helm:
