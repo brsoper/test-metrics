@@ -49,7 +49,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/$CHART_NAME:${{ env.VERSION }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.CHART_NAME }}:${{ env.VERSION }}
 
 
   update-helm:
